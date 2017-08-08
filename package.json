@@ -1,0 +1,27 @@
+{
+  "name": "mochawesome-report-aggregator",
+  "version": "0.0.1",
+  "description": "A CLI which when run on a directory will group many mochawesome reports into one report.",
+  "main": "index.js",
+  "bin": {
+    "mochawesome-report-aggregator": "index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/ethangodt/mochawesome-report-aggregator"
+  },
+  "keywords": [
+    "mochawesome",
+    "reports",
+    "group",
+    "aggregator"
+  ],
+  "author": "Ethan Godt",
+  "license": "ISC",
+  "dependencies": {
+    "mochawesome-report-generator": "^2.2.2"
+  }
+}
