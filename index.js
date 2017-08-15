@@ -1,22 +1,16 @@
 #! /usr/bin/env node
 
-/**
- * - make aggregate handle filter by profile or not
- *
- * - make an aggregate by profile
- * - append the profile name to each test and suite?
- * - add everything together
- * - concat all suites and active tests, etc
- */
-
 const aggregate = require('./aggregate')
 const superAggregate = require('./superAggregate')
 const relPathToReports = process.argv[2]
 const profilesArg = process.argv[3] || ''
 let profiles = profilesArg.split(',')
 
-if (profiles.length < 2) {
-  // if for some reason not providing any profiles, just group everything
+
+const isMultiProfile = profiles.length > 1
+if (!isMultiProfile) {
+  // if only providing one (or none) profile then consider final aggregate
+  // (i.e. no need to prefix with "chrome")
   profiles = ['']
 }
 
@@ -25,8 +19,9 @@ profiles.forEach((profile) => {
   aggregate.byProfile(relPathToReports, profile)
 })
 
-if (profiles.length < 2) {
+if (!isMultiProfile) {
+  // no need to group profile aggregates into a "super" aggregate
   return
 }
 
-superAggregate.byProfile(relPathToReports)
+aggregate.everything(relPathToReports)
